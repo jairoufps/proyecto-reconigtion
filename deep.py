@@ -19,6 +19,7 @@ from readNeuronal import Net
 
 
 tranformadaTraining = transforms.Compose([
+    transforms.Resize((960,720)),
     transforms.ToTensor(),
     transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))
 ])
