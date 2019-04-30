@@ -101,16 +101,14 @@ def testDataTraining():
             imagen = cv2.resize(imagen,(valorWitdh,valorHeight),cv2.INTER_CUBIC)
         else:
             imagen = cv2.resize(imagen,(valorWitdh,valorHeight),cv2.INTER_AREA)
+        imagenTensor = torch.from_numpy(imagen)
+        ouput = redneuronal(imagenTensor.to(device))
+        _,prediccion = torch.max(ouput.data,1)
+        print('La prediccion es :')
+        print(clasesEntramiento[prediccion[0].item()])
         
-       imagenTensor = torch.from_numpy(imagen)
-       ouput = redneuronal(imagenTensor.to(device))
-       _,prediccion = torch.max(ouput.data,1)
-       print('La prediccion es :')
-
-       print(clasesEntramiento[prediccion[0].item()])
-
-       print('la ubicacion de la imagen es ')
-       print(str(folder))
+        print('la ubicacion de la imagen es ')
+        print(str(folder))
      
 
 
