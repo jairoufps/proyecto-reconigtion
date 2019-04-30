@@ -82,7 +82,7 @@ def entrenamiento():
             optimizador.step()
             lossTotal+=loss.item()
             cantidadLosscalculado+=1
-            print('Me estoy entrenando en '+device)
+            print('Me estoy entrenando en '+str(device))
         
         if epoch%5==0:
             lossPromedio = (lossTotal/cantidadLosscalculado)
