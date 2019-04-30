@@ -125,9 +125,9 @@ def loadModel():
     try:
         redneuronal.load_state_dict(torch.load('./modelo/'+ubicacion))
         redneuronal.eval()
+    except:
+        print('archivo no existe')
         
-
-
 
 entrenamiento()
 saveModel()
