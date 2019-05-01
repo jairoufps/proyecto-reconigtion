@@ -35,6 +35,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 redneuronal = Net().to(device)
 
 
+print('se ejecutara en '+str(device))
 
 def mostrarImagen(img):
    
