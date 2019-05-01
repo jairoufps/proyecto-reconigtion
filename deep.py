@@ -113,7 +113,7 @@ def testDataTraining():
         ouput = redneuronal(Variable(imagenTensor.float().to(device)))
         _,prediccion = torch.max(ouput.data,1)
         print('La prediccion es :')
-        print(clasesEntramiento[prediccion[0].item()])
+        print(prediccion)
         
         print('la ubicacion de la imagen es ')
         print(str(folder))
