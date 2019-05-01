@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import pdb 
-pdb.set_trace()
+#pdb.set_trace()
 import torch
 from torch.autograd import Variable
 import numpy as np
@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt # for plotting
 from PIL import Image
 from readNeuronal import Net
 
-"""
+
 tranformadaTraining = transforms.Compose([
     transforms.Resize((960,720)),
     transforms.ToTensor(),
@@ -29,7 +29,7 @@ dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tr
 dataLoaderTraining = DataLoader(dataTraining,batch_size=4,shuffle=False)
 
 clasesEntramiento = dataTraining.classes
-"""
+
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 redneuronal = Net().to(device)
