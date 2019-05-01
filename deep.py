@@ -139,4 +139,5 @@ def loadModel():
 
 #entrenamiento()
 #saveModel()
+loadModel()
 testDataTraining()
