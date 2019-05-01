@@ -84,6 +84,7 @@ def entrenamiento():
             lossTotal+=loss.item()
             cantidadLosscalculado+=1
             print('Me estoy entrenando en '+str(device))
+            print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
         
         if epoch%5==0:
             lossPromedio = (lossTotal/cantidadLosscalculado)
@@ -113,7 +114,7 @@ def testDataTraining():
         ouput = redneuronal(Variable(imagenTensor.float().to(device)))
         _,prediccion = torch.max(ouput.data,1)
         print('La prediccion es :')
-        print(prediccion)
+        print(clasesEntramiento[prediccion[0].item()])
         
         print('la ubicacion de la imagen es ')
         print(str(folder))
