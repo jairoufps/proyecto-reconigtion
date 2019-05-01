@@ -108,7 +108,7 @@ def testDataTraining():
         imagenTensor = imagenTensor.transpose(0,2)
         imagenTensor = imagenTensor.transpose(1,2)
         imagenTensor = imagenTensor.unsqueeze(1)
-        imagenTensor = imagenTensor.transpose(0,1)git 
+        imagenTensor = imagenTensor.transpose(0,1)
        
         ouput = redneuronal(Variable(imagenTensor.float().to(device)))
         _,prediccion = torch.max(ouput.data,1)
