@@ -64,7 +64,7 @@ def loadClassesOfFolder():
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 20
+    NUMBER_EPOCHS = 20000
     LEARNING_RATIO = 1e-2
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO)
@@ -75,24 +75,31 @@ def entrenamiento():
 
         dataTrainingIter = iter(dataLoaderTraining)
         for data,labels in dataTrainingIter:
-            redneuronal.zero_grad()
-            data,labels = Variable(data.float().to(device)),Variable(labels.to(device))
-            ouput = redneuronal(data)
-            loss = lossFunction(ouput,labels)
-            loss.backward()
-            optimizador.step()
-            lossTotal+=loss.item()
-            cantidadLosscalculado+=1
-            print('Me estoy entrenando en '+str(device))
-            print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+            try:
+
+                redneuronal.zero_grad()
+                data,labels = Variable(data.float().to(device)),Variable(labels.to(device))
+                ouput = redneuronal(data)
+                loss = lossFunction(ouput,labels)
+                loss.backward()
+                optimizador.step()
+                lossTotal+=loss.item()
+                cantidadLosscalculado+=1
+                print('Me estoy entrenando en '+str(device))
+                print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+            except Exception as e:
+                print(e)
         
         if epoch%5==0:
-            lossPromedio = (lossTotal/cantidadLosscalculado)
-            print('funcion de perdida promedio '+str(lossPromedio))
-            print('cantidad de ciclos '+str(epoch+1))
-            lossTotal = 0
-            cantidadLosscalculado = 0
+            try:
 
+                lossPromedio = (lossTotal/cantidadLosscalculado)
+                print('funcion de perdida promedio '+str(lossPromedio))
+                print('cantidad de ciclos '+str(epoch+1))
+                lossTotal = 0
+                cantidadLosscalculado = 0
+            except Exception as e:
+                print(e)
 
 def testDataTraining():
     folderImagenes = Path('./imagentest')
@@ -138,7 +145,7 @@ def loadModel():
         print('archivo no existe')
         
 
-#entrenamiento()
-#saveModel()
-loadModel()
+entrenamiento()
+saveModel()
+#loadModel()
 testDataTraining()
