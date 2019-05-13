@@ -133,7 +133,13 @@ def testDataTraining():
 
     
 def saveModel():
-    torch.save(redneuronal.state_dict(),'./modelo/modelo1.pt')
+    try:
+
+        torch.save(redneuronal.state_dict(),'./modelo/modelo1.pt')
+    except:
+        p =Path('./modelo')
+        p.mkdir(parents=True, exist_ok=True)
+        torch.save(redneuronal.state_dict(),'./modelo/modelo1.pt')
 
 
 def loadModel():
@@ -142,6 +148,7 @@ def loadModel():
         redneuronal.load_state_dict(torch.load('./modelo/'+ubicacion))
         redneuronal.eval()
     except:
+        
         print('archivo no existe')
         
 
