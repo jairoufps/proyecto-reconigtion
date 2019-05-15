@@ -159,7 +159,8 @@ def loadModel():
 #testDataTraining()
 
 
-if __name__== 'main':
+if __name__ == '__main__':
+
     mp.set_start_method('spawn')
     number_process = 4
 
