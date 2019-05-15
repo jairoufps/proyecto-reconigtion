@@ -16,6 +16,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt # for plotting
 from PIL import Image
 from readNeuronal import Net
+import torch.multiprocessing as mp
 
 
 tranformadaTraining = transforms.Compose([
@@ -64,7 +65,7 @@ def loadClassesOfFolder():
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 20000
+    NUMBER_EPOCHS = 2000
     LEARNING_RATIO = 1e-2
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO)
@@ -152,7 +153,23 @@ def loadModel():
         print('archivo no existe')
         
 
-entrenamiento()
-saveModel()
+#entrenamiento()
+#saveModel()
 #loadModel()
-testDataTraining()
+#testDataTraining()
+
+
+if __name__== 'main':
+    mp.set_start_method('spawn')
+    number_process = 4
+
+    redneuronal.share_memory()
+    process = []
+
+    for rank in range(number_process):
+        p = mp.Process(target=entrenamiento)
+        p.start()
+        process.append(p)
+    
+    for p in process:
+        p.join()
