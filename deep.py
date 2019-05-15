@@ -34,9 +34,14 @@ clasesEntramiento = dataTraining.classes
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 redneuronal = Net()
-if torch.cuda.device_count > 1:
-    redneuronal = nn.DataParallel(redneuronal)
-    
+
+#Si se encuentra en gpu ejecuto paralelismo
+def initParallel():
+
+    if torch.cuda.device_count() > 1:
+        redneuronal = nn.DataParallel(redneuronal)
+
+
 redneuronal.to(device)
 
 
@@ -155,16 +160,9 @@ def loadModel():
     except:
         
         print('archivo no existe')
-        
-
-#entrenamiento()
-#saveModel()
-#loadModel()
-#testDataTraining()
 
 
-if __name__ == '__main__':
-
+def trainingWithThreads():
     mp.set_start_method('spawn')
     number_process = 3
 
@@ -179,4 +177,28 @@ if __name__ == '__main__':
     for p in process:
         p.join()
 
+
+#entrenamiento()
+#saveModel()
+#loadModel()
+#testDataTraining()
+
+
+if __name__ == '__main__':
+    initParallel()
+"""
+    mp.set_start_method('spawn')
+    number_process = 3
+
+    redneuronal.share_memory()
+    process = []
+
+    for rank in range(number_process):
+        p = mp.Process(target=entrenamiento)
+        p.start()
+        process.append(p)
+    
+    for p in process:
+        p.join()
+"""
     saveModel()
