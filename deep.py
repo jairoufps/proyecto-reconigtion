@@ -33,7 +33,11 @@ clasesEntramiento = dataTraining.classes
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-redneuronal = Net().to(device)
+redneuronal = Net()
+if torch.cuda.device_count > 1:
+    redneuronal = nn.DataParallel(redneuronal)
+    
+redneuronal.to(device)
 
 
 print('se ejecutara en '+str(device))
@@ -162,7 +166,7 @@ def loadModel():
 if __name__ == '__main__':
 
     mp.set_start_method('spawn')
-    number_process = 4
+    number_process = 3
 
     redneuronal.share_memory()
     process = []
@@ -174,3 +178,5 @@ if __name__ == '__main__':
     
     for p in process:
         p.join()
+
+    saveModel()
