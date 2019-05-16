@@ -41,6 +41,9 @@ def initParallel():
     if torch.cuda.device_count() > 1:
         redneuronal = nn.DataParallel(redneuronal)
 
+#if torch.cuda.device_count() > 1:
+    #redneuronal = nn.DataParallel(redneuronal)
+
 
 redneuronal.to(device)
 
@@ -185,10 +188,11 @@ def trainingWithThreads():
 
 
 if __name__ == '__main__':
-    initParallel()
-"""
+    #entrenamiento()
+    
+
     mp.set_start_method('spawn')
-    number_process = 3
+    number_process = 4
 
     redneuronal.share_memory()
     process = []
@@ -200,5 +204,8 @@ if __name__ == '__main__':
     
     for p in process:
         p.join()
-"""
+    
     saveModel()
+    testDataTraining()
+
+    #saveModel()
