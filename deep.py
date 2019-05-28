@@ -20,7 +20,7 @@ import torch.multiprocessing as mp
 
 
 tranformadaTraining = transforms.Compose([
-    transforms.Resize((960,720)),
+    transforms.Resize([int(256),int(256)]),
     transforms.ToTensor(),
     transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))
 ])
@@ -77,7 +77,7 @@ def loadClassesOfFolder():
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 2000
+    NUMBER_EPOCHS = 128
     LEARNING_RATIO = 1e-2
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO)
@@ -98,8 +98,8 @@ def entrenamiento():
                 optimizador.step()
                 lossTotal+=loss.item()
                 cantidadLosscalculado+=1
-                print('Me estoy entrenando en '+str(device))
-                print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
+                #print('Me estoy entrenando en '+str(device))
+                #print('labels de entramiento  '+str(clasesEntramiento[labels[0].item()]))
             except Exception as e:
                 print(e)
         
@@ -116,9 +116,9 @@ def entrenamiento():
 
 def testDataTraining():
     folderImagenes = Path('./imagentest')
-    valorBaseImagen = 2073600
-    valorWitdh = 720
-    valorHeight = 960
+    valorBaseImagen = 65536
+    valorWitdh = 256
+    valorHeight = 256
     for folder in folderImagenes.iterdir():
         imagen = cv2.imread(str(folder))
         if imagen.size<valorBaseImagen:
@@ -190,6 +190,7 @@ def trainingWithThreads():
 if __name__ == '__main__':
     entrenamiento()
     saveModel()
+    testDataTraining()
     
     """
     mp.set_start_method('spawn')

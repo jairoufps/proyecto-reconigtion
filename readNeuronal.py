@@ -16,7 +16,7 @@ class Net(nn.Module):
         self.convolucionalTwo = nn.Conv2d(10,20,5)
         #474X354
         #237X177
-        self.funcionLinealOne = nn.Linear(20*177*237,800)
+        self.funcionLinealOne = nn.Linear(20*61*61,800)
         self.funcionLinealTwo = nn.Linear(800,460)
 
     def forward(self,x):
@@ -26,7 +26,7 @@ class Net(nn.Module):
         x = self.convolucionalTwo(x)
         x = F.relu(x)
         x = self.pool(x)
-        x = x.view(-1,20*177*237)
+        x = x.view(-1,20*61*61)
         x = self.funcionLinealOne(x)
         x = F.relu(x)
         x = self.funcionLinealTwo(x)
