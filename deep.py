@@ -20,6 +20,7 @@ import torch.multiprocessing as mp
 
 
 tranformadaTraining = transforms.Compose([
+     transforms.ToPILImage(),
     transforms.Resize([int(256),int(256)]),
     transforms.ToTensor(),
     transforms.CenterCrop([240, 240]),
@@ -28,7 +29,7 @@ tranformadaTraining = transforms.Compose([
 
 
 dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
-dataLoaderTraining = DataLoader(dataTraining,batch_size=512,shuffle=False)
+dataLoaderTraining = DataLoader(dataTraining,batch_size=130,shuffle=False)
 
 clasesEntramiento = dataTraining.classes
 
@@ -74,18 +75,30 @@ def loadClassesOfFolder():
 
 
 
+def reduceLearningRatio(optimizer):
+    for param in optimizer.param_groups:
+        param['lr'] /= 10
+
+
 
 
 def entrenamiento():
 
     NUMBER_EPOCHS = 128
-    LEARNING_RATIO = 1e-2
+    LEARNING_RATIO = 0.1
     lossFunction = nn.CrossEntropyLoss()
-    optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO)
+    optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO, momentum=0.9)
     cantidadLosscalculado = 0
     lossTotal = 0
 
     for epoch in range(NUMBER_EPOCHS):
+        if epoch == 35:
+            reduceLearningRatio(optimizador)
+        if epoch == 65:
+            reduceLearningRatio(optimizador)
+        if epoch == 95:
+            reduceLearningRatio(optimizador) 
+
 
         dataTrainingIter = iter(dataLoaderTraining)
         for data,labels in dataTrainingIter:
