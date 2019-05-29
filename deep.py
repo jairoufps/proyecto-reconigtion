@@ -42,7 +42,7 @@ def initParallel():
         redneuronal = nn.DataParallel(redneuronal)
 
 if torch.cuda.device_count() > 1:
-    redneuronal = nn.DataParallel(redneuronal)
+    redneuronal = nn.DataParallel(redneuronal,device_ids=[0,1,2,3,4,5,6])
 
 
 redneuronal.to(device)
