@@ -163,6 +163,7 @@ def reTraining():
     optimizador.load_state_dict(checkpoint['optimizer_state_dict'])
     loss = checkpoint['loss']
     redneuronal.train()
+    print(checkpoint)
     
 def saveModel():
     try:
