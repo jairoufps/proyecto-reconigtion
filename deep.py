@@ -37,6 +37,9 @@ clasesEntramiento = dataTraining.classes
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 redneuronal = Net()
+lossFunction = nn.CrossEntropyLoss()
+LEARNING_RATIO = 0.001
+optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO, momentum=0.9)
 
 #Si se encuentra en gpu ejecuto paralelismo
 def initParallel():
@@ -85,10 +88,9 @@ def reduceLearningRatio(optimizer):
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 200
-    LEARNING_RATIO = 0.001
-    lossFunction = nn.CrossEntropyLoss()
-    optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO, momentum=0.9)
+    NUMBER_EPOCHS = 5
+    
+   
     cantidadLosscalculado = 0
     lossTotal = 0
 
@@ -152,7 +154,16 @@ def testDataTraining():
 
 
 
-
+def reTraining():
+   
+   
+    ubicacion = 'modelo1.pt'
+    optimizador = optim.SGD()
+    checkpoint = torch.load('./modelo/'+ubicacion)
+    redneuronal.load_state_dict(checkpoint['model_state_dict'])
+    optimizador.load_state_dict(checkpoint['optimizer_state_dict'])
+    loss = checkpoint['loss']
+    redneuronal.train()
     
 def saveModel():
     try:
@@ -197,6 +208,7 @@ def trainingWithThreads():
 
 
 if __name__ == '__main__':
+    reTraining()
     entrenamiento()
     saveModel()
     testDataTraining()
