@@ -86,19 +86,13 @@ def reduceLearningRatio(optimizer):
 def entrenamiento():
 
     NUMBER_EPOCHS = 200
-    LEARNING_RATIO = 0.1
+    LEARNING_RATIO = 0.001
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO, momentum=0.9)
     cantidadLosscalculado = 0
     lossTotal = 0
 
     for epoch in range(NUMBER_EPOCHS):
-        if epoch == 35:
-            reduceLearningRatio(optimizador)
-        if epoch == 65:
-            reduceLearningRatio(optimizador)
-        if epoch == 95:
-            reduceLearningRatio(optimizador) 
 
 
         dataTrainingIter = iter(dataLoaderTraining)
