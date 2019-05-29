@@ -21,8 +21,8 @@ import torch.multiprocessing as mp
 
 tranformadaTraining = transforms.Compose([
     
-    transforms.Resize([int(256),int(256)]),
-    transforms.RandomCrop([240, 240]),
+    transforms.Resize([int(300),int(300)]),
+    transforms.RandomCrop([256, 256]),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
     transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))
