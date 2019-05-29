@@ -85,7 +85,7 @@ def reduceLearningRatio(optimizer):
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 128
+    NUMBER_EPOCHS = 200
     LEARNING_RATIO = 0.1
     lossFunction = nn.CrossEntropyLoss()
     optimizador = optim.SGD(redneuronal.parameters(),lr=LEARNING_RATIO, momentum=0.9)
@@ -209,7 +209,7 @@ if __name__ == '__main__':
     
     """
     mp.set_start_method('spawn')
-    number_process = 4
+    number_process = 3
 
     redneuronal.share_memory()
     process = []
