@@ -158,7 +158,6 @@ def reTraining():
    
    
     ubicacion = 'modelo1.pt'
-    optimizador = optim.SGD()
     checkpoint = torch.load('./modelo/'+ubicacion)
     redneuronal.load_state_dict(checkpoint['model_state_dict'])
     optimizador.load_state_dict(checkpoint['optimizer_state_dict'])
