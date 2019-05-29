@@ -27,7 +27,7 @@ tranformadaTraining = transforms.Compose([
 
 
 dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
-dataLoaderTraining = DataLoader(dataTraining,batch_size=80,shuffle=False)
+dataLoaderTraining = DataLoader(dataTraining,batch_size=512,shuffle=False)
 
 clasesEntramiento = dataTraining.classes
 
@@ -41,8 +41,8 @@ def initParallel():
     if torch.cuda.device_count() > 1:
         redneuronal = nn.DataParallel(redneuronal)
 
-if torch.cuda.device_count() > 1:
-    redneuronal = nn.DataParallel(redneuronal,device_ids=[0,1,2,3,4,5,6])
+#if torch.cuda.device_count() > 1:
+    #redneuronal = nn.DataParallel(redneuronal,device_ids=[0,1,2,3,4,5,6])
 
 
 redneuronal.to(device)
@@ -188,11 +188,11 @@ def trainingWithThreads():
 
 
 if __name__ == '__main__':
-    entrenamiento()
-    saveModel()
-    testDataTraining()
+    #entrenamiento()
+    #saveModel()
+    #testDataTraining()
     
-    """
+    
     mp.set_start_method('spawn')
     number_process = 4
 
@@ -209,5 +209,5 @@ if __name__ == '__main__':
     
     saveModel()
     testDataTraining()
-"""
-    #saveModel()
+
+    saveModel()
