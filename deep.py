@@ -88,7 +88,7 @@ def reduceLearningRatio(optimizer):
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 600
+    NUMBER_EPOCHS = 700
     
    
     cantidadLosscalculado = 0
