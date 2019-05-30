@@ -160,7 +160,7 @@ def reTraining():
     ubicacion = 'modelo1.pt'
     checkpoint = torch.load('./modelo/'+ubicacion)
     print(checkpoint)
-    redneuronal.load_state_dict(checkpoint['state_dict'])
+    redneuronal.load_state_dict(checkpoint)
     optimizador.load_state_dict(checkpoint['optimizer_state_dict'])
     loss = checkpoint['loss']
     redneuronal.train()
