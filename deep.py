@@ -157,8 +157,9 @@ def testDataTraining():
 def testBase():
     dataiter = iter(dataTesting)
     images,labels = dataiter.__next__()
-    _,prediccion = torch.max(ouput.data,1)
     ouput = redneuronal(Variable(images.float().to(device)))
+    _,prediccion = torch.max(ouput.data,1)
+    
 
     for number in range(4):
         print('el id de la imagen es   '+labels[number])
