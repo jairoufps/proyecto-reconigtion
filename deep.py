@@ -88,7 +88,7 @@ def reduceLearningRatio(optimizer):
 
 def entrenamiento():
 
-    NUMBER_EPOCHS = 5
+    NUMBER_EPOCHS = 600
     
    
     cantidadLosscalculado = 0
@@ -159,20 +159,19 @@ def reTraining():
    
     ubicacion = 'modelo1.pt'
     checkpoint = torch.load('./modelo/'+ubicacion)
-    for k in checkpoint:
-        print(k)
 
     
-    redneuronal.load_state_dict(checkpoint)
-    optimizador.load_state_dict(checkpoint['optimizador'])
-    loss = checkpoint['loss']
+    redneuronal.load_state_dict(checkpoint['model_state_dict'])
+    optimizador.load_state_dict(checkpoint['optimizer_state_dict'])
+    redneuronal.to(device)
     redneuronal.train()
    
     
 def saveModel():
     try:
 
-        torch.save(redneuronal.state_dict(),'./modelo/modelo1.pt')
+        torch.save({'model_state_dict':redneuronal.state_dict(),
+                    'optimizer_state_dict': optimizador.state_dict() },'./modelo/modelo1.pt')
     except:
         p =Path('./modelo')
         p.mkdir(parents=True, exist_ok=True)
