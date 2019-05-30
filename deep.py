@@ -29,9 +29,9 @@ tranformadaTraining = transforms.Compose([
 ])
 
 
-dataTraining = torchvision.datasets.ImageFolder('./products_assets',train=True,transform=tranformadaTraining)
+dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
 dataLoaderTraining = DataLoader(dataTraining,batch_size=130,shuffle=False)
-dataTesting = torchvision.datasets.ImageFolder('./products_assets',train=False,transform=tranformadaTraining)
+dataTesting = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
 dataLoaderTesting = DataLoader(dataTesting,batch_size=4,shuffle=False)
 
 
