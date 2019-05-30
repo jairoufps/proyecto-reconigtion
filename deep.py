@@ -29,8 +29,11 @@ tranformadaTraining = transforms.Compose([
 ])
 
 
-dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
+dataTraining = torchvision.datasets.ImageFolder('./products_assets',train=True,transform=tranformadaTraining)
 dataLoaderTraining = DataLoader(dataTraining,batch_size=130,shuffle=False)
+dataTesting = torchvision.datasets.ImageFolder('./products_assets',train=False,transform=tranformadaTraining)
+dataLoaderTesting = DataLoader(dataTesting,batch_size=4,shuffle=False)
+
 
 clasesEntramiento = dataTraining.classes
 
@@ -151,6 +154,18 @@ def testDataTraining():
         print(str(folder))
      
 
+def testBase():
+    dataiter = iter(dataTesting)
+    images,labels = dataiter.next()
+    _,prediccion = torch.max(ouput.data,1)
+    ouput = redneuronal(Variable(images.float().to(device)))
+
+    for number in range(4):
+        print('el id de la imagen es   '+labels[number])
+        print('la prediccion es '+prediccion[number])
+
+
+
 
 
 
@@ -212,9 +227,11 @@ def trainingWithThreads():
 
 if __name__ == '__main__':
     #reTraining()
-    entrenamiento()
-    saveModel()
-    testDataTraining()
+    #entrenamiento()
+    #saveModel()
+    #testDataTraining()
+    loadModel()
+    testBase()
     
     """
     mp.set_start_method('spawn')
