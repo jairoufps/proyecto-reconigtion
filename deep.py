@@ -211,7 +211,7 @@ def trainingWithThreads():
 
 
 if __name__ == '__main__':
-    reTraining()
+    #reTraining()
     entrenamiento()
     saveModel()
     testDataTraining()
