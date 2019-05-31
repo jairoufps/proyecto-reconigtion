@@ -233,10 +233,10 @@ def trainingWithThreads():
 
 if __name__ == '__main__':
     #reTraining()
-    #entrenamiento()
-    #saveModel()
+    entrenamiento()
+    saveModel()
     #testDataTraining()
-    loadModel()
+    #loadModel()
     testBase()
     
     """
