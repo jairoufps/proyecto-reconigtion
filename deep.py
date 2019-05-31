@@ -160,8 +160,8 @@ def testBase():
         ouput = redneuronal(Variable(images.to(device)))
         _,prediccion = torch.max(ouput.data,1)
         for number in range(4):
-            print('el id de la imagen es   '+labels[number])
-            print('la prediccion es '+prediccion[number])
+            print('el id de la imagen es   '+str(labels[number]))
+            print('la prediccion es '+str(prediccion[number]))
     
     
 
