@@ -199,8 +199,9 @@ def saveModel():
 
 def loadModel():
     ubicacion = 'modelo1.pt'
+    checkpoint = torch.load('./modelo/'+ubicacion)
     try:
-        redneuronal.load_state_dict(torch.load('./modelo/'+ubicacion))
+        redneuronal.load_state_dict(checkpoint['model_state_dict'])
         redneuronal.eval()
     except Exception as e:
         
