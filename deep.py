@@ -31,7 +31,7 @@ tranformadaTraining = transforms.Compose([
 
 dataTraining = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
 dataLoaderTraining = DataLoader(dataTraining,batch_size=130,shuffle=False)
-dataTesting = torchvision.datasets.ImageFolder('./products_assets',transform=tranformadaTraining)
+dataTesting = torchvision.datasets.ImageFolder('./prueba',transform=tranformadaTraining)
 dataLoaderTesting = DataLoader(dataTesting,batch_size=4,shuffle=False)
 
 
@@ -160,8 +160,8 @@ def testBase():
         ouput = redneuronal(Variable(images.to(device)))
         _,prediccion = torch.max(ouput.data,1)
         for number in range(4):
-            print('el id de la imagen es   '+str(labels[number]))
-            print('la prediccion es '+str(prediccion[number]))
+            #print('el id de la imagen es   '+str(labels[number]))
+            print('la prediccion es '+str(clasesEntramiento[prediccion[number].item()]))
     
     
 
