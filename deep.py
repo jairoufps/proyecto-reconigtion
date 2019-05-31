@@ -202,9 +202,10 @@ def loadModel():
     try:
         redneuronal.load_state_dict(torch.load('./modelo/'+ubicacion))
         redneuronal.eval()
-    except:
+    except Exception as e:
         
         print('archivo no existe')
+        print(e)
 
 
 def trainingWithThreads():
